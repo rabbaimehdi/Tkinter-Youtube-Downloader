@@ -36,11 +36,19 @@ url = tkinter.StringVar()
 link = customtkinter.CTkEntry(app,width= 350, height=30, placeholder_text="Paste youtube link here", textvariable=url)
 link.pack()
 
-#Video title after download
+#Finished downloading
 
 finished_label = customtkinter.CTkLabel(app, text="")
 finished_label.pack(padx = 5, pady = 5)
 
+#Progressbar & percentage 
+
+p_percentage = customtkinter.CTkLabel(app, text= "0%")
+p_percentage.pack()
+
+progress_bar = customtkinter.CTkProgressBar(app,width= 350)
+progress_bar.set(0)
+progress_bar.pack(padx=10, pady= 10)
 #Download Button
 
 download_button = customtkinter.CTkButton(app, width=140, height=28, text="Download", command=start_download)
