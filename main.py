@@ -8,7 +8,7 @@ def start_download():
     try:
         yt_link = link.get()
         print(yt_link)
-        yt_object = YouTube(yt_link)
+        yt_object = YouTube(yt_link, on_progress_callback=on_progress)
         video = yt_object.streams.get_highest_resolution()
         video.download()
         title.configure(text = yt_object.title)
@@ -17,6 +17,17 @@ def start_download():
     except:
         # print("Error : Link Invalid")
         finished_label.configure(text="Error : Link Invalid!", text_color = "red")
+
+def on_progress(stream, chunk, bytes_remaining):
+    total_size = stream.filesize
+    bytes_downloaded = total_size - bytes_remaining
+    percentage_completed = bytes_downloaded / total_size * 100
+    percentage  = str(int(percentage_completed))
+    p_percentage.configure(text = percentage + "%")
+    progress_bar.set(float(percentage_completed)/100)
+    
+    p_percentage.update()
+    # progress_bar.update()
 #Settings
 
 customtkinter.set_appearance_mode("Dark")
