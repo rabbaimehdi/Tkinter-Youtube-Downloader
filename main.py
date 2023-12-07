@@ -11,7 +11,7 @@ def start_download():
         yt_object = YouTube(yt_link)
         video = yt_object.streams.get_highest_resolution()
         video.download()
-        
+        title.configure(text = yt_object.title)
         # print("Donwload Complete!")
         finished_label.configure(text="Donwloaded!", text_color = 'green')
     except:
